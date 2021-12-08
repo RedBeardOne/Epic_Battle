@@ -24,7 +24,6 @@ public class Battle {
             if (defender.isEmpty()) {
                 return true;
             }
-
             fight(attacker.get(), defender.get());
         }
     }

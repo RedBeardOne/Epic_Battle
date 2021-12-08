@@ -18,7 +18,7 @@ public class Warrior implements IAttackCapable {
         this.health = defaultHealth;
     }
 
-    public static Warrior of(String clazz) {
+    public static Warrior create(String clazz) {
         return switch (clazz) {
             case "Warrior" -> new Warrior();
             case "Rookie" ->new Rookie();

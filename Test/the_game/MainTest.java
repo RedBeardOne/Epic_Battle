@@ -4,10 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import the_game.character.Defender;
-import the_game.character.Knight;
-import the_game.character.Vampire;
-import the_game.character.Warrior;
+import the_game.character.*;
 import the_game.funcions.Army;
 import the_game.funcions.Battle;
 
@@ -267,8 +264,8 @@ class MainTest {
             "Knight, Defender, true"})
     void battleTestParam(String firstWarrior, String secondWarrior, boolean expected) {
         //arrange
-        var first = Warrior.of(firstWarrior);
-        var second = Warrior.of(secondWarrior);
+        var first = Warrior.create(firstWarrior);
+        var second = Warrior.create(secondWarrior);
 
         //act
         Battle figth = new Battle();
@@ -362,8 +359,8 @@ class MainTest {
     @CsvSource({"Defender, Rookie, 60"})
     void battleTestRookie(String firstWarrior, String secondWarrior, int expected) {
         //arrange
-        var first = Warrior.of(firstWarrior);
-        var second = Warrior.of(secondWarrior);
+        var first = Warrior.create(firstWarrior);
+        var second = Warrior.create(secondWarrior);
 
         //act
         Battle figth = new Battle();
@@ -456,6 +453,31 @@ class MainTest {
         enemyArmy.addUnits(Defender.class, 4);
         enemyArmy.addUnits(Vampire.class, 13);
 
+        //act
+
+        var result =  Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("Vampire testing with param battle 15, 14 units vs 19")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestLancer15(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 5);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        myArmy.addUnits(Lancer.class, 5);
         //act
 
         var result =  Battle.fight(myArmy, enemyArmy);

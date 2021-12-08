@@ -6,6 +6,8 @@ public class Healer extends Warrior {
     private static final int defaultAttack = 0;
     private static final int heal = 2;
 
+
+
     public Healer() {
         super(defaultHealth);
     }
@@ -15,9 +17,10 @@ public class Healer extends Warrior {
         return defaultAttack;
     }
 
-    public void healing(Warrior warrior) {
+
+    public void heal(Warrior warrior) {
         if (warrior.isAlive()) {
-            setHealth(Math.min(warrior.getDefaultHealth(), warrior.getHealth() + 2));
+            setHealth(Math.min(warrior.getDefaultHealth(), warrior.getHealth() + heal));
         }
     }
 }
