@@ -4,10 +4,7 @@ import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
-import the_game.character.Defender;
-import the_game.character.Knight;
-import the_game.character.Vampire;
-import the_game.character.Warrior;
+import the_game.character.*;
 import the_game.funcions.Army;
 import the_game.funcions.Battle;
 
@@ -151,7 +148,7 @@ class MainTest {
         enemyArmy.addUnits(Warrior.class, 3);
 
         //act
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertFalse(result);
@@ -184,7 +181,7 @@ class MainTest {
         enemyArmy.addUnits(Warrior.class, 21);
 
         //act
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertTrue(result);
@@ -201,7 +198,7 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertTrue(result);
@@ -218,7 +215,7 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertTrue(result);
@@ -235,7 +232,7 @@ class MainTest {
 
         //act
         Battle figth = new Battle();
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertTrue(result);
@@ -253,7 +250,7 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertFalse(result);
@@ -292,7 +289,7 @@ class MainTest {
 
         //act
 
-        var resalt =  Battle.fight(myArmy, enemyArmy);
+        var resalt = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, resalt);
@@ -312,7 +309,7 @@ class MainTest {
 
         //act
 
-        var resalt =  Battle.fight(myArmy, enemyArmy);
+        var resalt = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, resalt);
@@ -332,7 +329,7 @@ class MainTest {
 
         //act
 
-        var resalt =  Battle.fight(myArmy, enemyArmy);
+        var resalt = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, resalt);
@@ -351,7 +348,7 @@ class MainTest {
         enemyArmy.addUnits(Warrior.class, 5);
 
         //act
-        var resalt =  Battle.fight(myArmy, enemyArmy);
+        var resalt = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, resalt);
@@ -391,11 +388,12 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);
     }
+
     @DisplayName(" Vampire testing with param battle 12, 9 units vs 11")
     @ParameterizedTest
     @CsvSource({"false"})
@@ -413,11 +411,12 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);
     }
+
     @DisplayName(" Vampire testing with param battle 13, 18 units vs 21")
     @ParameterizedTest
     @CsvSource({"true"})
@@ -435,7 +434,7 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);
@@ -458,7 +457,80 @@ class MainTest {
 
         //act
 
-        var result =  Battle.fight(myArmy, enemyArmy);
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("Lancer testing with param battle 15, 14 units vs 19")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestLancerFifthteen(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 5);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 5);
+
+        //act
+
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+    @DisplayName("Lancer testing with param battle 16, 16 units vs 18")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestLancerSix(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 7);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 4);
+
+        //act
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("Lancer testing with param battle 16, 16 units vs 18")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestLancerSeventeen(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 7);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 4);
+
+        //act
+        var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);

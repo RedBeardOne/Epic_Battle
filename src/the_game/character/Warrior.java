@@ -8,6 +8,9 @@ public class Warrior implements IAttackCapable {
     private int health;
     private Warrior behind;
 
+
+    private Warrior inFront;
+
     protected Warrior(int health) {
         this.health = health;
     }
@@ -61,5 +64,13 @@ public class Warrior implements IAttackCapable {
 
     public void setBehind(Warrior behind) {
         this.behind = behind;
+    }
+
+    public Warrior getInFront() {
+        return inFront;
+    }
+
+    public void setInFront(Warrior inFront) {
+        this.inFront = inFront;
     }
 }
