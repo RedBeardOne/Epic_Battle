@@ -12,23 +12,19 @@ public class Army {
             units.add(Warrior.of(unit.getSimpleName()));
         }
         for (int i = 0; i < units.size(); i++) {
-            if (i == 0 && units.size()!=1) {
+            if (i == 0 && units.size() != 1) {
                 units.get(i).setBehind(units.get(i + 1));
                 units.get(i).setInFront(null);
-                System.out.println("i =" + i);
-            } else if (i > 0 && i < units.size()-1) {
+            } else if (i > 0 && i < units.size() - 1) {
                 units.get(i).setBehind(units.get(i + 1));
                 units.get(i).setInFront(units.get(i - 1));
-                System.out.println("i =" + i);
-            } else if (i>0 && i == units.size()-1) {
+            } else if (i > 0 && i == units.size() - 1) {
                 units.get(i).setBehind(null);
                 units.get(i).setInFront(units.get(i - 1));
-                System.out.println("i =" + i);
             }
         }
         return this;
     }
-
 
     public Optional<Warrior> getFirstWarrior() {
         return units.stream().filter(Warrior::isAlive).findFirst();

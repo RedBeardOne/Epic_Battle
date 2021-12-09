@@ -11,8 +11,8 @@ public class Main {
         myArmy.addUnits(Lancer.class, 1);
 
         enemyArmy.addUnits(Warrior.class, 1);
-        enemyArmy.addUnits(Knight.class, 1);
-
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Healer.class, 1);
 
         System.out.println(Battle.fight(myArmy, enemyArmy));
     }

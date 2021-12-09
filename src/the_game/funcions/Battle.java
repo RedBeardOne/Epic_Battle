@@ -3,9 +3,11 @@ package the_game.funcions;
 import the_game.character.Warrior;
 
 public class Battle {
+
+
     public static boolean fight(Warrior warriorOne, Warrior warriorTwo) {
         while (warriorOne.isAlive() && warriorTwo.isAlive()) {
-           warriorOne.attack(warriorTwo);
+            warriorOne.attack(warriorTwo);
             if (warriorTwo.isAlive()) {
                 warriorTwo.attack(warriorOne);
             }
@@ -24,7 +26,6 @@ public class Battle {
             if (defender.isEmpty()) {
                 return true;
             }
-
             fight(attacker.get(), defender.get());
         }
     }

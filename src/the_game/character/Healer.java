@@ -1,6 +1,8 @@
 package the_game.character;
 
-public class Healer extends Warrior {
+import the_game.funcions.IAttackObserver;
+
+public class Healer extends Warrior implements IAttackObserver {
 
     private static final int defaultHealth = 60;
     private static final int defaultAttack = 0;
@@ -15,9 +17,27 @@ public class Healer extends Warrior {
         return defaultAttack;
     }
 
-    public void healing(Warrior warrior) {
-        if (warrior.isAlive()) {
-            setHealth(Math.min(warrior.getDefaultHealth(), warrior.getHealth() + 2));
+    @Override
+    public void setInFront(Warrior inFront) {
+        super.setInFront(inFront);
+        if (inFront != null) {
+            inFront.setAttackObserve(this);
+        }
+    }
+
+    @Override
+    public void trackAttack(Warrior warrior) {
+        this.healing();
+    }
+
+    private void healing() {
+        var warriorInFront = getInFront();
+        if (warriorInFront == null) {
+            // no warriors in front
+        } else if (warriorInFront.isAlive()) {
+           warriorInFront.setHealth(Math.min(warriorInFront.getDefaultHealth(), warriorInFront.getHealth() + 2));
+        } else if (!warriorInFront.isAlive()) {
+            warriorInFront.setAttackObserve(null);
         }
     }
 }

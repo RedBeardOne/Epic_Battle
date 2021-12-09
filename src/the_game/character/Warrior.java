@@ -1,21 +1,32 @@
 package the_game.character;
 
 import the_game.funcions.IAttackCapable;
+import the_game.funcions.IAttackObserver;
 
 public class Warrior implements IAttackCapable {
     private static int defaultHealth = 50;
     private static int attack = 5;
     private int health;
     private Warrior behind;
-
-
     private Warrior inFront;
+    private IAttackObserver attackObserve;
+
+
+    protected IAttackObserver getAttackObserve() {
+        return attackObserve;
+    }
+
+    protected void setAttackObserve(IAttackObserver attackObserve) {
+        this.attackObserve = attackObserve;
+    }
 
     protected Warrior(int health) {
         this.health = health;
     }
 
-    protected int getDefaultHealth(){return defaultHealth;}
+    protected int getDefaultHealth() {
+        return defaultHealth;
+    }
 
     public Warrior() {
         this.health = defaultHealth;
@@ -24,17 +35,18 @@ public class Warrior implements IAttackCapable {
     public static Warrior of(String clazz) {
         return switch (clazz) {
             case "Warrior" -> new Warrior();
-            case "Rookie" ->new Rookie();
+            case "Rookie" -> new Rookie();
             case "Knight" -> new Knight();
             case "Defender" -> new Defender();
             case "Vampire" -> new Vampire();
             case "Lancer" -> new Lancer();
+            case "Healer" -> new Healer();
 
             default -> throw new IllegalArgumentException("Unknown Warrior type: " + clazz);
         };
     }
 
-   public int getHealth() {
+    public int getHealth() {
         return health;
     }
 
@@ -56,9 +68,13 @@ public class Warrior implements IAttackCapable {
 
     public void attack(Warrior warrior) {
         warrior.getDamageFrom(this);
+        var observe = getAttackObserve();
+        if (observe != null) {
+            observe.trackAttack(this);
+        }
     }
 
-    protected Warrior getBehind() {
+    public Warrior getBehind() {
         return behind;
     }
 
@@ -73,4 +89,5 @@ public class Warrior implements IAttackCapable {
     public void setInFront(Warrior inFront) {
         this.inFront = inFront;
     }
+
 }

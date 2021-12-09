@@ -1,0 +1,7 @@
+
+R
+"src/the_game/character/Rookie.java,6\0\603bdc49fce0f2cf380dfae635cc4533495c2fd6
+R
+"src/the_game/character/Knight.java,e\8\e86cd90072840fe4c514e1ff4d092ce6b578658f
+T
+$src/the_game/character/Defender.java,d\e\de5579db4013f13c929621aa8fe9af3b209cd2ab
