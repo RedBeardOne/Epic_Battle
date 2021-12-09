@@ -7,18 +7,12 @@ public class Warrior implements IAttackCapable {
     private static int defaultHealth = 50;
     private static int attack = 5;
     private int health;
-    private Warrior behind;
     private Warrior inFront;
+    private Warrior behind;
     private IAttackObserver attackObserve;
 
 
-    protected IAttackObserver getAttackObserve() {
-        return attackObserve;
-    }
 
-    protected void setAttackObserve(IAttackObserver attackObserve) {
-        this.attackObserve = attackObserve;
-    }
 
     protected Warrior(int health) {
         this.health = health;
@@ -70,7 +64,7 @@ public class Warrior implements IAttackCapable {
         warrior.getDamageFrom(this);
         var observe = getAttackObserve();
         if (observe != null) {
-            observe.trackAttack(this);
+            observe.traceAttack(this);
         }
     }
 
@@ -88,6 +82,14 @@ public class Warrior implements IAttackCapable {
 
     public void setInFront(Warrior inFront) {
         this.inFront = inFront;
+    }
+
+    protected IAttackObserver getAttackObserve() {
+        return attackObserve;
+    }
+
+    protected void setAttackObserve(IAttackObserver attackObserve) {
+        this.attackObserve = attackObserve;
     }
 
 }

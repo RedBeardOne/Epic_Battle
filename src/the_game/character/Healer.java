@@ -8,6 +8,11 @@ public class Healer extends Warrior implements IAttackObserver {
     private static final int defaultAttack = 0;
     private static final int heal = 2;
 
+    @Override
+    protected int getDefaultHealth() {
+        return defaultHealth;
+    }
+
     public Healer() {
         super(defaultHealth);
     }
@@ -26,16 +31,16 @@ public class Healer extends Warrior implements IAttackObserver {
     }
 
     @Override
-    public void trackAttack(Warrior warrior) {
+    public void traceAttack(Warrior warrior) {
         this.healing();
     }
 
     private void healing() {
         var warriorInFront = getInFront();
+        var health = warriorInFront.getDefaultHealth();
         if (warriorInFront == null) {
-            // no warriors in front
         } else if (warriorInFront.isAlive()) {
-           warriorInFront.setHealth(Math.min(warriorInFront.getDefaultHealth(), warriorInFront.getHealth() + 2));
+           warriorInFront.setHealth(Math.min(health, warriorInFront.getHealth() + heal));
         } else if (!warriorInFront.isAlive()) {
             warriorInFront.setAttackObserve(null);
         }

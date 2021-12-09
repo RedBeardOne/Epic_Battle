@@ -535,4 +535,86 @@ class MainTest {
         //assert
         assertEquals(expected, result);
     }
+
+    @DisplayName("Healer testing with param battle Checkio, 9 units vs 13")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestHealerCheckio(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Defender.class, 2);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Vampire.class, 2);
+        myArmy.addUnits(Lancer.class, 2);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Warrior.class, 1);
+
+        enemyArmy.addUnits(Warrior.class, 2);
+        enemyArmy.addUnits(Lancer.class, 4);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Defender.class, 2);
+        enemyArmy.addUnits(Vampire.class, 3);
+        enemyArmy.addUnits(Healer.class, 1);
+
+        //act
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("Healer testing with param battle Checkio #2, 5 units vs 7")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestHealerCheckioSecond(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Warrior.class, 1);
+        myArmy.addUnits(Lancer.class, 1);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Defender.class, 2);
+
+        enemyArmy.addUnits(Vampire.class, 3);
+        enemyArmy.addUnits(Warrior.class, 1);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Lancer.class, 2);
+
+
+
+        //act
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+    @DisplayName("Healer testing with param battle 18, 9 units vs 13")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestHealerEighteen(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 1);
+        myArmy.addUnits(Warrior.class, 3);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Knight.class, 1);
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 4);
+
+
+
+        //act
+        var result = Battle.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
 }

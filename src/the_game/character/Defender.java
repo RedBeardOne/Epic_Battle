@@ -4,17 +4,22 @@ import the_game.funcions.IAttackCapable;
 
 public class Defender extends Warrior {
 
-    private static int health = 60;
+    private static int defaultHealth = 60;
     private static int defence = 2;
-    private static int attack = 3;
+    private static int defaultAttack = 3;
+
+    @Override
+    protected int getDefaultHealth() {
+        return defaultHealth;
+    }
 
     public Defender() {
-        super(health);
+        super(defaultHealth);
     }
 
     @Override
     public int getAttack() {
-        return attack;
+        return defaultAttack;
     }
 
     @Override
