@@ -2,9 +2,12 @@ package the_game.funcions;
 
 import the_game.character.Warrior;
 
+import java.security.PublicKey;
 import java.util.*;
 
 public class Army {
+
+
     private final List<Warrior> units = new ArrayList<>();
 
     public Army addUnits(Class<? extends Warrior> unit, int count) {
@@ -28,5 +31,30 @@ public class Army {
 
     public Optional<Warrior> getFirstWarrior() {
         return units.stream().filter(Warrior::isAlive).findFirst();
+    }
+
+    public List<Warrior> getUnits() {
+        return units;
+    }
+
+    public static Army straightFormation(Army army) {
+        Iterator<Warrior> iterator = army.units.iterator();
+        while (iterator.hasNext()) {
+            Warrior warrior = iterator.next();
+            warrior.setInFront(null);
+            warrior.setBehind(null);
+        }
+        return army;
+    }
+
+    public static Army buryTheDead(Army army) {
+        Iterator<Warrior> iterator = army.units.iterator();
+        while (iterator.hasNext()) {
+            Warrior warrior = iterator.next();
+            if (!warrior.isAlive()) {
+                iterator.remove();
+            }
+        }
+        return army;
     }
 }

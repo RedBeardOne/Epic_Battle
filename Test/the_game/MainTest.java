@@ -617,4 +617,54 @@ class MainTest {
         //assert
         assertEquals(expected, result);
     }
+
+    @DisplayName("StraightFight testing with param battle Chekio")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestStraightFight(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Defender.class, 2);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Vampire.class, 2);
+        myArmy.addUnits(Lancer.class, 2);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Warrior.class, 1);
+
+        enemyArmy.addUnits(Warrior.class, 2);
+        enemyArmy.addUnits(Lancer.class, 4);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Defender.class, 2);
+        enemyArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Healer.class, 1);
+
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("StraightFight testing with param battle Chekio #2")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestStraightFightTwo(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        myArmy.addUnits(Warrior.class, 10);
+
+        enemyArmy.addUnits(Warrior.class, 6);
+        enemyArmy.addUnits(Lancer.class, 5);
+
+
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
 }

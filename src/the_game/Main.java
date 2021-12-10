@@ -9,19 +9,19 @@ public class Main {
         Army myArmy = new Army();
         Army enemyArmy = new Army();
 
-        myArmy.addUnits(Warrior.class, 1);
-        myArmy.addUnits(Lancer.class, 1);
-        myArmy.addUnits(Healer.class, 1);
-        myArmy.addUnits(Warrior.class, 1);
+        myArmy.addUnits(Warrior.class, 2);
+        myArmy.addUnits(Knight.class, 1);
 
 
-        enemyArmy.addUnits(Lancer.class, 4);
+
+        enemyArmy.addUnits(Knight.class, 5);
         enemyArmy.addUnits(Healer.class, 1);
-        enemyArmy.addUnits(Defender.class, 2);
-        enemyArmy.addUnits(Vampire.class, 3);
-        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Knight.class, 1);
 
 
-        System.out.println(Battle.fight(myArmy, enemyArmy));
+
+        System.out.println(Battle.straightFight(myArmy, enemyArmy));
+
+
     }
 }

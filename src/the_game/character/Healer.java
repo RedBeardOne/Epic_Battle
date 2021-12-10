@@ -37,11 +37,10 @@ public class Healer extends Warrior implements IAttackObserver {
 
     private void healing() {
         var warriorInFront = getInFront();
-        var health = warriorInFront.getDefaultHealth();
-        if (warriorInFront == null) {
-        } else if (warriorInFront.isAlive()) {
-           warriorInFront.setHealth(Math.min(health, warriorInFront.getHealth() + heal));
-        } else if (!warriorInFront.isAlive()) {
+        int health = warriorInFront == null ? 0 : warriorInFront.getDefaultHealth();
+        if (warriorInFront!=null && warriorInFront.isAlive() ) {
+            warriorInFront.setHealth(Math.min(health, warriorInFront.getHealth() + heal));
+        } else if (warriorInFront!=null && !warriorInFront.isAlive()) {
             warriorInFront.setAttackObserve(null);
         }
     }
