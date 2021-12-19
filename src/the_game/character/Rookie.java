@@ -1,19 +1,12 @@
 package the_game.character;
 
 public class Rookie extends Warrior{
-    private static int defaultHealth = 60;
-    private static int defaultAttack =  1;
+    private static int defaultHealthRookie = 60;
+    private static int defaultAttackRookie =  1;
 
-    @Override
-    protected int getDefaultHealth() {
-        return defaultHealth;
-    }
 
     public Rookie(){
-        super(defaultHealth);
+        super(defaultHealthRookie, defaultAttackRookie);
     }
-    @Override
-    public int getAttack() {
-        return defaultAttack;
-    }
+
 }

@@ -3,12 +3,11 @@ package the_game.character;
 import java.util.Objects;
 
 public class Lancer extends Warrior {
-    private static int attack = 6;
+    private static int defaultAttackLancer = 6;
     private static int decay = 50;
 
-    @Override
-    public int getAttack() {
-        return attack;
+    public Lancer(){
+     super(50, defaultAttackLancer);
     }
 
     @Override

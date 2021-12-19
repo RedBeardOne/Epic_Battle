@@ -2,10 +2,7 @@ package the_game.funcions;
 
 import the_game.character.Warrior;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
-import java.util.ListIterator;
 
 public class Battle {
 
@@ -22,14 +19,17 @@ public class Battle {
 
     public static boolean fight(Army army1, Army army2) {
         while (true) {
+            army1.moveUnitsInBattle();
             var attacker = army1.getFirstWarrior();
             if (attacker.isEmpty()) {
                 return false;
             }
+            army2.moveUnitsInBattle();
             var defender = army2.getFirstWarrior();
             if (defender.isEmpty()) {
                 return true;
             }
+
             fight(attacker.get(), defender.get());
         }
     }
@@ -37,30 +37,32 @@ public class Battle {
     public static boolean straightFight(Army one, Army two) {
         Army.straightFormation(one);
         Army.straightFormation(two);
-        straightFight(one.getUnits(), two.getUnits());
-        return one.getUnits().size() > 0;
+        straightFightAux(one, two);
+        if (one.getFirstWarrior().isPresent()) {
+            one.buildInColumn();
+        } else two.buildInColumn();
+        return one.getFirstWarrior().isPresent();
     }
 
-    private static boolean straightFight(List<Warrior> firstArmy, List<Warrior> secondArmy) {
-        if (firstArmy.isEmpty() || secondArmy.isEmpty()) {
-            return true;
+    private static boolean straightFightAux(Army one, Army two) {
+        Iterator<Warrior> firstArmy = one.iterator();
+        Iterator<Warrior> secondArmy = two.iterator();
+        if (!firstArmy.hasNext() || !secondArmy.hasNext()) {
+            return firstArmy.hasNext(); ///
         }
-        ListIterator<Warrior> iteratorOne = firstArmy.listIterator();
-        ListIterator<Warrior> iteratorTwo = secondArmy.listIterator();
-
-        while (iteratorOne.hasNext() && iteratorTwo.hasNext()) {
-            var warriorOne = iteratorOne.next();
-            var warriorTwo = iteratorTwo.next();
+        while (firstArmy.hasNext() && secondArmy.hasNext()) {
+            var warriorOne = firstArmy.next();
+            var warriorTwo = secondArmy.next();
             var fight = fight(warriorOne, warriorTwo);
             if (!warriorOne.isAlive()) {
-                iteratorOne.remove();
+                firstArmy.remove();
             } else if (!warriorTwo.isAlive()) {
-                iteratorTwo.remove();
+                secondArmy.remove();
             } else {
                 throw new IllegalArgumentException();
             }
         }
-        return straightFight(firstArmy, secondArmy);
+        return straightFightAux(one, two);
     }
 }
 

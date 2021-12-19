@@ -1,11 +1,11 @@
 package the_game.character;
 
-public class Knight extends Warrior{
-    private static int attack = 7;
+public class Knight extends Warrior {
+    private static int defaultHealthKnight = 50;
+    private static int defaultAttackKnight = 7;
 
-    @Override
-    public int getAttack() {
-        return attack;
+    public Knight() {
+        super(defaultHealthKnight, defaultAttackKnight);
     }
 
 }

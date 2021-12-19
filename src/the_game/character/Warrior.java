@@ -2,28 +2,32 @@ package the_game.character;
 
 import the_game.funcions.IAttackCapable;
 import the_game.funcions.IAttackObserver;
+import the_game.funcions.Weapons;
 
 public class Warrior implements IAttackCapable {
-    private static int defaultHealth = 50;
-    private static int attack = 5;
+    private static int defaultHealthWarrior = 50;
+    public static int defaultAttackWarrior = 5;
     private int health;
+    private int attack;
     private Warrior inFront;
     private Warrior behind;
+    private String weapon;
     private IAttackObserver attackObserve;
+    private int healthDef;
 
 
+    public Warrior() {
+       this(defaultHealthWarrior, defaultAttackWarrior);
+    }
 
-
-    protected Warrior(int health) {
+    protected Warrior(int health, int attack) {
         this.health = health;
+        this.attack = attack;
+        this.healthDef = health;
     }
 
     protected int getDefaultHealth() {
-        return defaultHealth;
-    }
-
-    public Warrior() {
-        this.health = defaultHealth;
+        return healthDef;
     }
 
     public static Warrior of(String clazz) {
@@ -35,6 +39,7 @@ public class Warrior implements IAttackCapable {
             case "Vampire" -> new Vampire();
             case "Lancer" -> new Lancer();
             case "Healer" -> new Healer();
+            case "Warlord" ->new Warlord();
 
             default -> throw new IllegalArgumentException("Unknown Warrior type: " + clazz);
         };
@@ -46,6 +51,14 @@ public class Warrior implements IAttackCapable {
 
     protected void setHealth(int health) {
         this.health = health;
+    }
+
+    protected void setAttack(int attack) {
+        this.attack = attack;
+    }
+
+    public void setWeapon(String weapon) {
+        this.weapon = weapon;
     }
 
     public int getAttack() {
@@ -92,4 +105,10 @@ public class Warrior implements IAttackCapable {
         this.attackObserve = attackObserve;
     }
 
+
+    public void equipWeapon(Weapons weapons) {
+        setHealth(this.health + weapons.getHealth());
+        setAttack(this.attack + weapons.getAttack());
+        setWeapon(" equipped with " +weapons.getClass().getSimpleName());
+    }
 }

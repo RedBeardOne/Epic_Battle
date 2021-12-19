@@ -5,8 +5,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import the_game.character.*;
-import the_game.funcions.Army;
-import the_game.funcions.Battle;
+import the_game.funcions.*;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -487,6 +486,7 @@ class MainTest {
         //assert
         assertEquals(expected, result);
     }
+
     @DisplayName("Lancer testing with param battle 16, 16 units vs 18")
     @ParameterizedTest
     @CsvSource({"true"})
@@ -582,13 +582,13 @@ class MainTest {
         enemyArmy.addUnits(Lancer.class, 2);
 
 
-
         //act
         var result = Battle.fight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);
     }
+
     @DisplayName("Healer testing with param battle 18, 9 units vs 13")
     @ParameterizedTest
     @CsvSource({"false"})
@@ -608,7 +608,6 @@ class MainTest {
         enemyArmy.addUnits(Healer.class, 1);
         enemyArmy.addUnits(Vampire.class, 6);
         enemyArmy.addUnits(Lancer.class, 4);
-
 
 
         //act
@@ -649,7 +648,7 @@ class MainTest {
     @DisplayName("StraightFight testing with param battle Chekio #2")
     @ParameterizedTest
     @CsvSource({"false"})
-    void battleTestStraightFightTwo(boolean expected) {
+    void battleTestStraightFightNineteen(boolean expected) {
         //arrange
         Army myArmy = new Army();
         Army enemyArmy = new Army();
@@ -659,12 +658,618 @@ class MainTest {
         enemyArmy.addUnits(Warrior.class, 6);
         enemyArmy.addUnits(Lancer.class, 5);
 
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("StraightFight testing with param battle Chekio #2")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestStraightFightTwo(boolean expected) {
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 5);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 5);
 
         //act
         var result = Battle.straightFight(myArmy, enemyArmy);
 
         //assert
         assertEquals(expected, result);
+    }
+
+    @DisplayName("StraightFight testing with param battle Chekio")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestStraightFightTwenty(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 7);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Defender.class, 2);
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Vampire.class, 6);
+        myArmy.addUnits(Lancer.class, 4);
+
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("StraightFight testing with param battle 21")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestStraightFightTwentyOne(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 7);
+        myArmy.addUnits(Vampire.class, 3);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Defender.class, 2);
+
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Vampire.class, 6);
+        enemyArmy.addUnits(Lancer.class, 4);
+
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("StraightFight testing with param battle 22")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestStraightFightTwentyTwo(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+        myArmy.addUnits(Lancer.class, 4);
+        myArmy.addUnits(Warrior.class, 3);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Warrior.class, 4);
+        myArmy.addUnits(Healer.class, 1);
+        myArmy.addUnits(Knight.class, 2);
+
+
+        enemyArmy.addUnits(Warrior.class, 4);
+        enemyArmy.addUnits(Defender.class, 4);
+        enemyArmy.addUnits(Healer.class, 1);
+        enemyArmy.addUnits(Vampire.class, 2);
+        enemyArmy.addUnits(Lancer.class, 4);
+
+        //act
+        var result = Battle.straightFight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, result);
+    }
+
+    @DisplayName("Fight testing with weapon first")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeapon(boolean expected) {
+        //arrange
+        var unit1 = new Warrior();
+        var unit2 = new Vampire();
+        Weapons claws = Weapons.builder().health(-10).attack(5).defence(0).vampirism(40).heal(0).build();
+        Weapons sword = new Sword();
+        unit1.equipWeapon(claws);
+        unit2.equipWeapon(sword);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(unit1, unit2);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon SECOND")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponSecond(boolean expected) {
+        //arrange
+        var unit1 = new Defender();
+        var unit2 = new Lancer();
+        Weapons shield = new Shield();
+        Weapons greatAxe = new GreatAxe();
+        unit1.equipWeapon(shield);
+        unit2.equipWeapon(greatAxe);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(unit1, unit2);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon THIRD")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponThird(boolean expected) {
+        //arrange
+        var unit1 = new Healer();
+        var unit2 = new Knight();
+        Weapons shield = new MagicWand();
+        Weapons greatAxe = new Katana();
+        unit1.equipWeapon(shield);
+        unit2.equipWeapon(greatAxe);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(unit1, unit2);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon FOUR")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponFourth(boolean expected) {
+        //arrange
+        var unit1 = new Defender();
+        var unit2 = new Vampire();
+        Weapons shield = new Shield();
+        Weapons greatAxe = new MagicWand();
+        Weapons weapon3 = new Shield();
+        Weapons katana = new Katana();
+
+        unit1.equipWeapon(shield);
+        unit1.equipWeapon(greatAxe);
+        unit2.equipWeapon(weapon3);
+        unit2.equipWeapon(katana);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(unit1, unit2);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Fifth")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeaponFifth(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var knight = new Knight();
+        var lancer = new Lancer();
+        var vampire = new Vampire();
+        var healer = new Healer();
+
+        Weapons greatAxe = new GreatAxe();
+        Weapons magicWand = new MagicWand();
+
+        knight.equipWeapon(greatAxe);
+        lancer.equipWeapon(magicWand);
+        vampire.equipWeapon(greatAxe);
+        healer.equipWeapon(magicWand);
+
+        myArmy.addUnits(knight);
+        myArmy.addUnits(lancer);
+        enemyArmy.addUnits(vampire);
+        enemyArmy.addUnits(healer);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Sixth")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeaponSixth(boolean expected) {
+        //arrange
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var defender = new Defender();
+        var warrior = new Warrior();
+        var knight = new Knight();
+        var healer = new Healer();
+
+        Weapons sword = new Sword();
+        Weapons greatAxe = new GreatAxe();
+
+
+        defender.equipWeapon(greatAxe);
+        warrior.equipWeapon(greatAxe);
+        knight.equipWeapon(sword);
+        healer.equipWeapon(sword);
+
+        myArmy.addUnits(defender);
+        myArmy.addUnits(warrior);
+        enemyArmy.addUnits(knight);
+        enemyArmy.addUnits(healer);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Seventh")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponSeventh(boolean expected) {
+        //arrange
+        Weapons katana = new Katana();
+        Weapons shield = new Shield();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var defender = new Defender();
+        var defenderSecond = new Defender();
+        var knight = new Knight();
+        var vampire = new Vampire();
+
+        defender.equipWeapon(katana);
+        defenderSecond.equipWeapon(katana);
+        knight.equipWeapon(katana);
+        vampire.equipWeapon(katana);
+
+        myArmy.addUnits(defender);
+        myArmy.addUnits(defenderSecond);
+        enemyArmy.addUnits(knight);
+        enemyArmy.addUnits(vampire);
+
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Eighth")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeaponEighth(boolean expected) {
+        //arrange
+        Weapons personalOne = Weapons.builder().health(-20).attack(6).defence(1).vampirism(40).heal(-2).build();
+        Weapons unique = Weapons.builder().health(20).attack(-2).defence(2).vampirism(-55).heal(3).build();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var knight1 = new Knight();
+        var knight2 = new Knight();
+        var knight3 = new Knight();
+
+        var warrior = new Warrior();
+        var defender = new Defender();
+        var defenderOne = new Defender();
+
+        knight1.equipWeapon(personalOne);
+        knight2.equipWeapon(personalOne);
+        knight3.equipWeapon(unique);
+
+        warrior.equipWeapon(personalOne);
+        defender.equipWeapon(unique);
+        defenderOne.equipWeapon(unique);
+
+        myArmy.addUnits(knight1);
+        myArmy.addUnits(knight2);
+        myArmy.addUnits(knight2);
+
+        enemyArmy.addUnits(warrior);
+        enemyArmy.addUnits(defender);
+        enemyArmy.addUnits(defenderOne);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Ninth")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponNinth(boolean expected) {
+        //arrange
+        Weapons personalOne = Weapons.builder().health(-20).attack(1).defence(1).vampirism(40).heal(-2).build();
+        Weapons uniqueTwo = Weapons.builder().health(20).attack(2).defence(2).vampirism(-55).heal(3).build();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var vampire1 = new Vampire();
+        var vampire2 = new Vampire();
+        var vampire3 = new Vampire();
+
+        var warrior = new Warrior();
+        var defender = new Defender();
+        var defenderOne = new Defender();
+
+        vampire1.equipWeapon(personalOne);
+        vampire2.equipWeapon(personalOne);
+        vampire3.equipWeapon(uniqueTwo);
+
+        warrior.equipWeapon(personalOne);
+        defender.equipWeapon(uniqueTwo);
+        defenderOne.equipWeapon(uniqueTwo);
+
+        myArmy.addUnits(vampire1);
+        myArmy.addUnits(vampire2);
+        myArmy.addUnits(vampire3);
+
+        enemyArmy.addUnits(warrior);
+        enemyArmy.addUnits(defender);
+        enemyArmy.addUnits(defenderOne);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Tenth")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeaponTenth(boolean expected) {
+        //arrange
+        Weapons katana = new Katana();
+        Weapons shield = new Shield();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var vampire1 = new Vampire();
+        var vampire2 = new Vampire();
+        var rookie1 = new Rookie();
+        var rookie2 = new Rookie();
+
+        var warrior = new Warrior();
+        var defender = new Defender();
+        var defenderOne = new Defender();
+
+        vampire1.equipWeapon(katana);
+        vampire2.equipWeapon(katana);
+        rookie1.equipWeapon(shield);
+
+        warrior.equipWeapon(katana);
+        defender.equipWeapon(shield);
+        defenderOne.equipWeapon(shield);
+
+        myArmy.addUnits(vampire1);
+        myArmy.addUnits(vampire2);
+        myArmy.addUnits(rookie1);
+        myArmy.addUnits(rookie2);
+
+        enemyArmy.addUnits(warrior);
+        enemyArmy.addUnits(defender);
+        enemyArmy.addUnits(defenderOne);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Eleventh")
+    @ParameterizedTest
+    @CsvSource({"true"})
+    void battleTestWeaponEleventh(boolean expected) {
+        //arrange
+        Weapons sword = new Sword();
+        Weapons greatAxe = new GreatAxe();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var vampire1 = new Vampire();
+        var vampire2 = new Vampire();
+        var vampire3 = new Vampire();
+
+        var warrior = new Warrior();
+        var defender = new Defender();
+
+        vampire1.equipWeapon(sword);
+        vampire2.equipWeapon(sword);
+        vampire3.equipWeapon(sword);
+
+        warrior.equipWeapon(greatAxe);
+        defender.equipWeapon(greatAxe);
+
+        myArmy.addUnits(vampire1);
+        myArmy.addUnits(vampire2);
+        myArmy.addUnits(vampire3);
+
+        enemyArmy.addUnits(warrior);
+        enemyArmy.addUnits(defender);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Twelve")
+    @ParameterizedTest
+    @CsvSource({"false"})
+    void battleTestWeaponTwelve(boolean expected) {
+        //arrange
+        Weapons katana = new Katana();
+        Weapons magicWand = new MagicWand();
+        Army myArmy = new Army();
+        Army enemyArmy = new Army();
+
+        var rookie1 = new Rookie();
+        var rookie2 = new Rookie();
+        var rookie3 = new Rookie();
+
+        var warrior = new Warrior();
+        var defender = new Defender();
+
+        rookie1.equipWeapon(katana);
+        rookie2.equipWeapon(katana);
+        rookie3.equipWeapon(katana);
+
+        warrior.equipWeapon(magicWand);
+        defender.equipWeapon(magicWand);
+
+        myArmy.addUnits(rookie1);
+        myArmy.addUnits(rookie2);
+        myArmy.addUnits(rookie3);
+
+        enemyArmy.addUnits(warrior);
+        enemyArmy.addUnits(defender);
+        //act
+        Battle figth = new Battle();
+        var resultSecond = figth.fight(myArmy, enemyArmy);
+
+        //assert
+        assertEquals(expected, resultSecond);
+    }
+
+    @DisplayName("Fight testing with weapon Warlords")
+    @Test
+    void battleTestArmyFightWithWarlordFirst() {
+        Army army_1 = new Army();
+        army_1.addUnits(Warlord.class, 1);
+        army_1.addUnits(Warrior.class, 2);
+        army_1.addUnits(Lancer.class, 2);
+        army_1.addUnits(Healer.class, 2);
+        army_1.addUnits(Healer.class, 1);
+
+        Army army_2 = new Army();
+        army_2.addUnits(Warlord.class, 1);
+        army_2.addUnits(Vampire.class, 1);
+        army_2.addUnits(Healer.class, 2);
+        army_2.addUnits(Knight.class, 2);
+
+
+        var result = Battle.fight(army_1, army_2);
+        assertTrue(result);
+    }
+
+    @DisplayName("Fight testing with weapon Warlords second")
+    @Test
+    void battleTestArmyFightWithWarlordSecond() {
+
+        Army army_1 = new Army()
+                .addUnits(Warrior.class, 2)
+                .addUnits(Lancer.class, 2)
+                .addUnits(Defender.class, 1)
+                .addUnits(Warlord.class, 3);
+
+        Army army_2 = new Army()
+                .addUnits(Warlord.class, 2)
+                .addUnits(Vampire.class, 1)
+                .addUnits(Healer.class, 5)
+                .addUnits(Knight.class, 2);
+
+
+        var result = Battle.fight(army_1, army_2);
+        assertFalse(result);
+    }
+
+    @DisplayName("Fight testing with weapon Warlords Third")
+    @Test
+    void battleTestArmyFightWithWarlordThird() {
+        Weapons sword = new Sword();
+        Weapons shield = new Shield();
+        Army myArmy = new Army();
+        Warrior warrior = new Warrior();
+        warrior.equipWeapon(sword);
+        myArmy.addUnits(warrior);
+        myArmy.addUnits(Warrior.class, 1)
+                .addUnits(Lancer.class, 3)
+                .addUnits(Defender.class, 1)
+                .addUnits(Warlord.class, 4);
+
+        Army enemyArmy = new Army();
+        Warrior warlord = new Warlord();
+        warlord.equipWeapon(shield);
+        enemyArmy.addUnits(warlord).addUnits(Vampire.class, 1)
+                .addUnits(Rookie.class, 1)
+                .addUnits(Knight.class, 1);
+        var result = Battle.fight(myArmy, enemyArmy);
+        assertTrue(result);
+    }
+
+    @DisplayName("Fight testing with weapon Warlords & Weapon Fourth ")
+    @Test
+    void battleTestArmyFightWithWarlordFourth() {
+        Weapons sword = new Sword();
+        Weapons shield = new Shield();
+        Army myArmy = new Army();
+        Warrior warrior = new Warrior();
+        warrior.equipWeapon(sword);
+        myArmy.addUnits(warrior);
+        myArmy.addUnits(Warrior.class, 1)
+                .addUnits(Lancer.class, 3)
+                .addUnits(Defender.class, 1)
+                .addUnits(Warlord.class, 4);
+
+        Army enemyArmy = new Army();
+        Warrior warlord = new Warlord();
+        warlord.equipWeapon(shield);
+        enemyArmy.addUnits(warlord)
+                .addUnits(Vampire.class, 1)
+                .addUnits(Rookie.class, 1)
+                .addUnits(Knight.class, 1);
+        var result = Battle.fight(myArmy, enemyArmy);
+        assertTrue(result);
+    }
+
+    @DisplayName("Fight testing with weapon Warlords & Weapon Fifth ")
+    @Test
+    void battleTestArmyFightWithWarlordFifth() {
+        Weapons sword = new Sword();
+        Weapons shield = new Shield();
+        Army myArmy = new Army();
+        Warrior warrior = new Warrior();
+        warrior.equipWeapon(sword);
+        myArmy.addUnits(warrior);
+        myArmy.addUnits(Warrior.class, 1)
+                .addUnits(Lancer.class, 3)
+                .addUnits(Defender.class, 1)
+                .addUnits(Warlord.class, 1);
+
+        Army enemyArmy = new Army();
+        Warrior warlord = new Warlord();
+        warlord.equipWeapon(shield);
+        enemyArmy.addUnits(warlord)
+                .addUnits(Warlord.class, 4)
+                .addUnits(Vampire.class, 1)
+                .addUnits(Rookie.class, 1)
+                .addUnits(Knight.class, 1);
+        var result = Battle.fight(myArmy, enemyArmy);
+        assertFalse(result);
     }
 
 }
